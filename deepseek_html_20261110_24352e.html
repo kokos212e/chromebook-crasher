@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>Chromium Crasher - Button</title>
+<style>
+  html, body {
+    height: 100%; margin: 0;
+    display: flex; align-items: center; justify-content: center;
+    background: #111; font-family: sans-serif;
+  }
+  #nuke {
+    width: 320px; height: 320px; border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, #ff9090, #c00000 60%, #3a0000);
+    border: 10px solid #800000; color: #fff;
+    font-size: 30px; font-weight: 900; letter-spacing: 2px; cursor: pointer;
+    box-shadow: 0 0 60px #f00, inset 0 0 40px #f00;
+    text-shadow: 0 0 10px #fff, 0 0 20px #f00;
+    animation: pulse 0.8s infinite;
+  }
+  @keyframes pulse {
+    0%,100% { box-shadow: 0 0 60px #f00, inset 0 0 40px #f00; transform: scale(1); }
+    50%     { box-shadow: 0 0 120px #f00, inset 0 0 70px #f00; transform: scale(1.05); }
+  }
+</style>
+</head>
+<body>
+  <button id="nuke">核ミサイル発射</button>
+
+<script>
+document.getElementById('nuke').addEventListener('click', () => {
+  // 元の無限ループ: i は 5,6,7,… と増え続け i>3 が常に真 → 永久ループ
+  for (var i = 5; i > 3; i = i + 1) {
+    console.log(i);
+  }
+});
+</script>
+</body>
+</html>
